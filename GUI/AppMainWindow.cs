@@ -3,11 +3,7 @@ using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
-using System;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using ToDo;
 
 namespace GUI
 {

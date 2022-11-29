@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Application.Sorting
+﻿namespace Application.Sorting
 {
     internal interface ICountable
     {

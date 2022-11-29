@@ -1,5 +1,4 @@
-﻿using Application;
-using Avalonia.Media;
+﻿using Avalonia.Media;
 
 namespace GUI
 {
