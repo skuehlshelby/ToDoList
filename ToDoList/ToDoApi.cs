@@ -69,5 +69,7 @@ namespace ToDo
         public static IComparer<IToDo> SummaryComparer => api.SummaryComparer;
 
         public static IComparer<IToDo> CompareByMultipleFields(params IComparer<IToDo>[] comparers) => api.CompareByMultipleFields(comparers);
+
+        public static IEqualityComparer<IToDo> GetRecordStyleEqualityComparer() => api.GetRecordStyleEqualityComparer();
     }
 }
