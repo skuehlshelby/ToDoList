@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ToDoList
+namespace ToDo
 {
     public struct Details : IValidatableObject, IEquatable<Details>
     {
@@ -37,6 +37,10 @@ namespace ToDoList
         public override int GetHashCode() => value.GetHashCode();
 
         public override string ToString() => value;
+
+        public static implicit operator Details(string value) => new(value);
+
+        public static explicit operator string(Details details) => details.value;
 
         public static bool operator ==(Details left, Details right) => left.Equals(right);
 

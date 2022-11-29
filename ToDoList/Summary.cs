@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ToDoList
+namespace ToDo
 {
     public struct Summary : IValidatableObject, IEquatable<Summary>
     {

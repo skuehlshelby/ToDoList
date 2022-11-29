@@ -1,4 +1,4 @@
-using ToDoList;
+using ToDo;
 
 namespace Tests
 {
@@ -11,11 +11,15 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void SerializationTest()
         {
-            ICollection<IToDo> todos = API.CreateToDos("Get Milk", "Make Breakfast");
+            ICollection<IToDo> todos = new IToDo[] { API.CreateToDo("Get Milk"), API.CreateToDo("Make Breakfast") };
 
             API.Serialize(GetDataLocation(), todos);
+
+            ICollection<IToDo> deserialized = API.Deserialize(GetDataLocation());
+
+            Assert.IsTrue(Enumerable.SequenceEqual(todos, deserialized, API.GetRecordStyleEqualityComparer()));
         }
     }
 }

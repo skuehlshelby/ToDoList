@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
-namespace ToDoList
+namespace ToDo
 {
-    public interface IToDo
+    public interface IToDo : INotifyPropertyChanged, IValidatableObject
     {
         bool Completed { get; set; }
 
