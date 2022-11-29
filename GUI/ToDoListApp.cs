@@ -22,6 +22,7 @@ namespace GUI
             });
 
             Resources.Add("Trash-Icon", ReadEmbeddedRessourceImage("trash-347.png"));
+            Resources.Add("Planner-Icon", ReadEmbeddedRessourceImage("planner.png"));
         }
 
         public IApplication Application => (IApplication)DataContext;

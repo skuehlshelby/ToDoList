@@ -2,6 +2,7 @@
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
+using Avalonia.Media.Imaging;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -32,6 +33,8 @@ namespace GUI
         private void Configure()
         {
             Theme theme = new Theme();
+
+            Icon = new WindowIcon((IBitmap)this.FindResource("Planner-Icon"));
 
             StackPanel buttons = new StackPanel()
             {

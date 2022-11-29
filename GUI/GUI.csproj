@@ -8,10 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="img\planner.png" />
     <None Remove="img\trash-347.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="img\planner.png" />
     <EmbeddedResource Include="img\trash-347.png" />
   </ItemGroup>
 
