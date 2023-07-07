@@ -1,24 +1,21 @@
 ﻿using Application;
 using Avalonia.Controls;
-using Avalonia;
 using System;
+using GUI.Styles;
 
 namespace GUI
 {
     internal static class CheckboxFactory
     {
-        public static IControl CreateCheckbox(IApplication application, Theme theme, string label, bool isChecked, Action<IApplication> onChecked, Action<IApplication> onUnchecked)
+        public static IControl CreateCheckbox(IApplication application, string label, bool isChecked, Action<IApplication> onChecked, Action<IApplication> onUnchecked)
         {
             CheckBox checkbox = new CheckBox()
             {
-                BorderBrush = theme.TextColor,
-                BorderThickness = new Thickness(2.0),
                 Content = label,
-                CornerRadius = new CornerRadius(5.0),
-                Foreground = theme.TextColor,
                 IsChecked = isChecked,
-                Margin = new Thickness(2.0)
             };
+
+            checkbox.Classes.AddRange(new string[] { WhiteText.Name, WhiteBorder.Name, Rounded.Name, SmallMargin.Name });
 
             checkbox.Checked += (sender, e) => 
             {
@@ -36,35 +33,10 @@ namespace GUI
 
             Border border = new Border()
             {
-                Background = theme.CheckboxColor,
-                BorderBrush = theme.CheckboxColor,
-                BorderThickness = new Thickness(2.0),
                 Child = checkbox,
-                CornerRadius = new CornerRadius(5.0),
-                Margin = new Thickness(4.0)
             };
 
-            border.PointerEnter += (sender, e) =>
-            {
-                if (sender is Border bdr)
-                {
-                    bdr.Background = theme.CheckboxHighlightColor;
-                    bdr.BorderBrush = theme.CheckboxHighlightColor;
-                }
-
-                e.Handled = true;
-            };
-
-            border.PointerLeave += (sender, e) =>
-            {
-                if (sender is Border bdr)
-                {
-                    bdr.Background = theme.CheckboxColor;
-                    bdr.BorderBrush = theme.CheckboxColor;
-                }
-
-                e.Handled = true;
-            };
+            border.Classes.AddRange(new string[] { PurpleBackgroundRedHighlight.Name, Rounded.Name, Padded.Name, SmallMargin.Name });
 
             return border;
         }

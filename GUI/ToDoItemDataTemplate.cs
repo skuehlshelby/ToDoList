@@ -8,6 +8,7 @@ using Avalonia.Data.Converters;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
+using GUI.Styles;
 using System;
 using System.Globalization;
 using ToDo;
@@ -17,12 +18,10 @@ namespace GUI
     internal sealed class ToDoItemDataTemplate : IDataTemplate
     {
         private readonly IApplication application;
-        private readonly Theme theme;
 
-        public ToDoItemDataTemplate(IApplication application, Theme theme)
+        public ToDoItemDataTemplate(IApplication application)
         {
             this.application = application;
-            this.theme = theme;
         }
 
         public bool Match(object data) => data is not null && data is IToDo;
@@ -33,10 +32,6 @@ namespace GUI
 
             CheckBox checkBox = new CheckBox()
             {
-                BorderBrush = theme.TextColor,
-                BorderThickness = new Thickness(2.0),
-                CornerRadius = new CornerRadius(5.0),
-                Foreground = theme.TextColor,
                 IsChecked = todo.Completed,
                 Margin = new Thickness(2.0),
                 Name = "Completed",
@@ -48,9 +43,10 @@ namespace GUI
                 }
             };
 
+            checkBox.Classes.AddRange(new string[] { WhiteBorder.Name, Rounded.Name });
+
             TextBlock displayText = new TextBlock()
             {
-                Foreground = theme.TextColor,
                 Name = "Display Text",
                 VerticalAlignment = VerticalAlignment.Center,
                 Text = todo.Summary.ToString(),
@@ -62,6 +58,8 @@ namespace GUI
                     Converter = new FuncValueConverter<bool, TextDecorationCollection>(v => v ? TextDecorations.Strikethrough : new TextDecorationCollection())
                 }
             };
+
+            displayText.Classes.Add(WhiteText.Name);
 
             displayText.DoubleTapped += (sender, e) =>
             {
@@ -115,10 +113,11 @@ namespace GUI
             Button deleteButton = new Button()
             {
                 BorderThickness = new Thickness(0.0),
-                Background = theme.ToDoItemHighlightColor,
                 MaxHeight = 22,
                 MaxWidth = 22,
                 Padding = new Thickness(0.0),
+                Margin = new Thickness(0.0),
+                BorderBrush = new SolidColorBrush(Colors.White),
                 Content = new Image() 
                 {
                     Margin = new Thickness(0.0),
@@ -127,6 +126,8 @@ namespace GUI
                 Cursor = new Cursor(StandardCursorType.Hand),
                 Name = "Delete",
             };
+
+            deleteButton.Classes.Add(Red.Name);
 
             deleteButton.Click += (sender, e) =>
             {
@@ -171,14 +172,11 @@ namespace GUI
 
             Border border = new Border()
             {
-                Background = theme.ToDoItemColor,
-                BorderBrush = theme.ToDoItemColor,
-                BorderThickness = new Thickness(2.0),
                 Child = expander,
-                CornerRadius = new CornerRadius(5.0),
-                Margin = new Thickness(4.0),
                 Name = "Border"
             };
+
+            border.Classes.AddRange(new string[] { PurpleBackgroundRedHighlight.Name, Rounded.Name, SmallMargin.Name });
 
             deleteButton.Bind(Button.IsVisibleProperty, new Binding()
             {
@@ -194,9 +192,6 @@ namespace GUI
                     displayText.Text = todo.Summary.ToString();
                 }
             };
-
-            border.AddHandler(InputElement.PointerEnterEvent, HandleMouseover);
-            border.AddHandler(InputElement.PointerLeaveEvent, HandleMouseover);
 
             return border;
         }
@@ -224,30 +219,6 @@ namespace GUI
             public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             {
                 return new Details(value.ToString());
-            }
-        }
-
-        private void HandleMouseover(object sender, PointerEventArgs e)
-        {
-            if (e.Source is Border border)
-            {
-                if (border.IsPointerOver)
-                {
-                    border.Background = theme.ToDoItemHighlightColor;
-                    border.BorderBrush = theme.ToDoItemHighlightColor;
-                }
-                else
-                {
-                    border.Background = theme.ToDoItemColor;
-                    border.BorderBrush = theme.ToDoItemColor;
-                }
-
-                e.Handled = true;
-            }
-            else
-            {
-                Console.WriteLine(e.Source.ToString());
-                e.Handled = true;
             }
         }
     }

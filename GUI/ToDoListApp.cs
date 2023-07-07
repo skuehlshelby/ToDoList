@@ -5,6 +5,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Media.Imaging;
 using Avalonia.Styling;
+using GUI.Styles;
 using AvaloniaApplication = Avalonia.Application;
 using IApplication = Application.IApplication;
 
@@ -18,7 +19,15 @@ namespace GUI
 
             Styles.AddRange(new IStyle[] {
                 new StyleInclude(baseUri: null) { Source = new Uri("resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default") },
-                new StyleInclude(baseUri: null) { Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"), }
+                new StyleInclude(baseUri: null) { Source = new Uri("resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"), },
+                new WhiteText(),
+                new WhiteBorder(),
+                new Rounded(),
+                new Padded(),
+                new MediumPadding(),
+                new SmallMargin(),
+                new PurpleBackgroundRedHighlight(),
+                new NoBorder(),
             });
 
             Resources.Add("Trash-Icon", ReadEmbeddedRessourceImage("trash-347.png"));

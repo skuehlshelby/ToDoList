@@ -40,22 +40,19 @@ namespace GUI
 
             buttons.Children.AddRange(new IControl[]
             {
-                ButtonFactory.CreateButton(Application, theme, "Create To-Do Item", a => a.AddToDo()),
-                ButtonFactory.CreateButton(Application, theme, "Remove Completed", a => a.RemoveCompletedToDos()),
+                ButtonFactory.CreateButton(Application, "Create To-Do Item", a => a.AddToDo()),
+                ButtonFactory.CreateButton(Application, "Remove Completed", a => a.RemoveCompletedToDos()),
                 CheckboxFactory.CreateCheckbox(Application,
-                                                    theme,
                                                     "Sort By Completed",
                                                     Application.IsSortingByCompleted(),
                                                     a => a.SortByCompleted(),
                                                     a => a.StopSortingByCompleted()),
                 CheckboxFactory.CreateCheckbox(Application,
-                                                    theme,
                                                     "Sort By Date Created",
                                                     Application.IsSortingByDateCreated(),
                                                     a => a.SortByDateCreated(),
                                                     a => a.StopSortingByDateCreated()),
                 CheckboxFactory.CreateCheckbox(Application,
-                                                    theme,
                                                     "Sort By Summary",
                                                     Application.IsSortingBySummary(),
                                                     a => a.SortBySummary(),
@@ -64,7 +61,7 @@ namespace GUI
 
             toDoItems.Background = theme.ListBackgroundColor;
             ((AvaloniaList<object>)toDoItems.Items).AddRange(Application.GetToDos());
-            toDoItems.DataTemplates.Add(new ToDoItemDataTemplate(Application, theme));
+            toDoItems.DataTemplates.Add(new ToDoItemDataTemplate(Application));
             toDoItems.Padding = new Thickness(5.0);
             toDoItems.CornerRadius = new CornerRadius(10.0, 0.0, 0.0, 10.0);
 
